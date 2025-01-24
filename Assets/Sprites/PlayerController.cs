@@ -1,5 +1,7 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody _rigidbody;
     private Vector2 _moveInput;
     private Vector3 _velocity;
+    [SerializeField] private PhotonView photonView;
 
     private void FixedUpdate()
     {
@@ -39,6 +42,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (!photonView.IsMine) return;
         _moveInput = context.ReadValue<Vector2>();
+        
     }
 }

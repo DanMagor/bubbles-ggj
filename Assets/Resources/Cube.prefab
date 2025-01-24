@@ -46,7 +46,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965113822884698139}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7835942895876479
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -129,7 +129,6 @@ MonoBehaviour:
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
-  - {fileID: 0}
   - {fileID: -5908982248874514850}
   sceneViewId: 0
   InstantiationId: 0
@@ -152,6 +151,7 @@ MonoBehaviour:
   turnResponsiveness: 2
   _rotationSpeed: 10
   _rigidbody: {fileID: 5887428969034659953}
+  photonView: {fileID: 6811463527506304}
 --- !u!54 &5887428969034659953
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -238,6 +238,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SynchronizeVelocity: 1
-  m_SynchronizeAngularVelocity: 1
+  m_SynchronizeAngularVelocity: 0
   m_TeleportEnabled: 1
   m_TeleportIfDistanceGreaterThan: 3
