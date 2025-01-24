@@ -16,7 +16,6 @@ public class GameInit : MonoBehaviour, IPunObservable
   private void Start()
   {
     var go = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0+(1.5f*playersConnected), 2, 0), Quaternion.identity);
-    go.GetComponent<MeshRenderer>().sharedMaterial = playersMaterials[playersConnected];
     playersConnected++;
   }
 
