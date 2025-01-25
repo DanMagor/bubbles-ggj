@@ -8,24 +8,24 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private string _playerTag = "Player";
+    
+    [Header("Movement Settings")] 
+    [SerializeField] private float _acceleration = 5f;
+    [SerializeField] private float _maxSpeed = 10f;
     [SerializeField] private float _baseStunDuration = 0.2f;
     [SerializeField] private float _additionalStunFor1MassDiff = 0.1f;
-    [Header("Movement Settings")] [SerializeField]
-    private float _acceleration = 5f;
+    private Vector2 _moveInput;
 
-    [SerializeField] private float _maxSpeed = 10f;
+
+    [Header("Physics Settings")] 
+    [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private Rigidbody _rigidbody;
+    private Vector3 _velocity;
+    [SerializeField] private PhotonView photonView;
 
     //Can be changed depending on what material ball is moving
     public float friction = 2f;
     public float turnResponsiveness = 2f;
-
-    [Header("Physics Settings")] [SerializeField]
-    private float _rotationSpeed = 10f;
-
-    [SerializeField] private Rigidbody _rigidbody;
-    private Vector2 _moveInput;
-    private Vector3 _velocity;
-    [SerializeField] private PhotonView photonView;
     private bool _isStunned = false;
 
     private void FixedUpdate()
@@ -64,17 +64,21 @@ public class PlayerController : MonoBehaviour
             {
                 var massDiff = enemyRb.mass - _rigidbody.mass;
                 _isStunned = true;
-                StartCoroutine(Stun(massDiff*_additionalStunFor1MassDiff));
-            } 
+                StartCoroutine(Stun(massDiff * _additionalStunFor1MassDiff));
+            }
+            else
+            {
+                StartCoroutine(Stun(0f));
+            }
         }
     }
 
     private IEnumerator Stun(float additionalStunDuration)
     {
-      yield return new WaitForSeconds(_baseStunDuration + additionalStunDuration);
-      _isStunned = false;
+        yield return new WaitForSeconds(_baseStunDuration + additionalStunDuration);
+        _isStunned = false;
     }
-    
+
     public void OnMove(InputAction.CallbackContext context)
     {
         if (!photonView.IsMine) return;
