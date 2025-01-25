@@ -8,6 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private string _playerTag = "Player";
+    [SerializeField] private string _iceTag = "Ice";
     
     [Header("Movement Settings")] 
     [SerializeField] private float _acceleration = 5f;
@@ -25,9 +26,18 @@ public class PlayerController : MonoBehaviour
 
     //Can be changed depending on what material ball is moving
     public float friction = 2f;
+    public float frictionOnIce = 0.5f;
     public float turnResponsiveness = 2f;
+    public float turnResponsivenessOnIce = 1f;
     private bool _isStunned = false;
+    private float _baseFriction = 0f;
+    private float _baseTurnResponsiveness = 0f;
 
+    private void Awake()
+    {
+        _baseFriction = friction;
+        _baseTurnResponsiveness = turnResponsiveness;
+    }
     private void FixedUpdate()
     {
         if (!_isStunned)
@@ -71,6 +81,21 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Stun(0f));
             }
         }
+
+        if (col.gameObject.CompareTag(_iceTag))
+        {
+            friction = frictionOnIce;
+            turnResponsiveness = turnResponsivenessOnIce;
+        }
+    }
+
+    private void OnCollisionExit(Collision col)
+    {
+        if (col.gameObject.CompareTag(_iceTag))
+        {
+            friction = _baseFriction;
+            turnResponsiveness = _baseTurnResponsiveness;
+        }    
     }
 
     private IEnumerator Stun(float additionalStunDuration)
