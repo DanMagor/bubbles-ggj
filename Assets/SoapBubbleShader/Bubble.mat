@@ -38,7 +38,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _Bias: 2.15
-    - _Mult: 0.823
+    - _Mult: 0.649
     - _Power: 1.22
     - _Scale: 0.1
     m_Colors: []
