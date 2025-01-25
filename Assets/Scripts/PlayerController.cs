@@ -1,7 +1,6 @@
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private float _acceleration = 5f;
 
     [SerializeField] private float _maxSpeed = 10f;
+
     //Can be changed depending on what material ball is moving
     public float friction = 2f;
     public float turnResponsiveness = 2f;
@@ -23,20 +23,24 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        var inputVelocity = new Vector3(_moveInput.x, 0, _moveInput.y) * _acceleration;
+        var inputVelocity = new Vector3(_moveInput.x * turnResponsiveness, 0, _moveInput.y * turnResponsiveness) *
+                            _acceleration;
 
-        if (_moveInput != Vector2.zero)
-            _velocity = Vector3.Lerp(_velocity, inputVelocity, turnResponsiveness * Time.fixedDeltaTime);
-        else
-            _velocity = Vector3.Lerp(_velocity, Vector3.zero, friction * Time.fixedDeltaTime);
+        _rigidbody.AddForce(inputVelocity, ForceMode.Acceleration);
 
-        _velocity = Vector3.ClampMagnitude(_velocity, _maxSpeed);
+        var horizontalVelocity = new Vector3(_rigidbody.velocity.x, 0, _rigidbody.velocity.z);
 
-        _rigidbody.MovePosition(_rigidbody.position + _velocity * Time.fixedDeltaTime);
-        if (_velocity.magnitude > 0.1f)
+        if (horizontalVelocity.magnitude > _maxSpeed)
         {
-            var rotation = Quaternion.Euler(new Vector3(_velocity.z, 0, -_velocity.x) * _rotationSpeed);
-            _rigidbody.MoveRotation(rotation * _rigidbody.rotation);
+            horizontalVelocity = horizontalVelocity.normalized * _maxSpeed;
+            _rigidbody.velocity = new Vector3(horizontalVelocity.x, _rigidbody.velocity.y, horizontalVelocity.z);
+        }
+
+        if (_moveInput == Vector2.zero)
+        {
+            var newHorizontalVelocity =
+                Vector3.Lerp(horizontalVelocity, Vector3.zero, friction * Time.fixedDeltaTime);
+            _rigidbody.velocity = new Vector3(newHorizontalVelocity.x, _rigidbody.velocity.y, newHorizontalVelocity.z);
         }
     }
 
@@ -44,6 +48,5 @@ public class PlayerController : MonoBehaviour
     {
         if (!photonView.IsMine) return;
         _moveInput = context.ReadValue<Vector2>();
-        
     }
 }

@@ -96,7 +96,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7748244662099875075}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: b3b194b8d490b7742a9ec97b6f847164, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -123,9 +123,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _acceleration: 10
-  _maxSpeed: 30
-  friction: 0.2
-  turnResponsiveness: 1.3
+  _maxSpeed: 11
+  friction: 0.5
+  turnResponsiveness: 4
   _rotationSpeed: 10
   _rigidbody: {fileID: 1480768578480677698}
   photonView: {fileID: -6909382407528085004}
