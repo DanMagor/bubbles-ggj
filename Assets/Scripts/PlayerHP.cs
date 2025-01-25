@@ -11,8 +11,8 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private float _hpInOneSnitch = 5;
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private GameObject _massBufferSnitchPrefab;
-    [SerializeField] private float _maxOffset = 0.3f;
-    [SerializeField] private float _minOffset = -0.3f;
+    [SerializeField] private float _maxOffset = 5f;
+    [SerializeField] private float _minOffset = -5f;
     [SerializeField] private Rigidbody _rb;
     private float _currentHP;
 
@@ -25,6 +25,31 @@ public class PlayerHP : MonoBehaviour
     {
         _currentHP -= damage;
         CreateSnitch(damage);
+        if (_currentHP <= 100f)
+        {
+            _rb.mass -= 1f; // Дефолт пузырь
+            gameObject.transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
+        }
+        else if (_currentHP <= 150f)
+        {
+            _rb.mass -= 1.5f; // Средний пузырь
+            gameObject.transform.localScale -= new Vector3(1.5f, 1.5f, 1.5f);
+        }
+        else if (_currentHP <= 200f)
+        {
+            _rb.mass -= 2f; // Большой пузырь
+            gameObject.transform.localScale -= new Vector3(2f, 2f, 2f);
+        }
+        else if (_currentHP <= 300f)
+        {
+            _rb.mass -= 3f; // Огромный пузырь
+            gameObject.transform.localScale -= new Vector3(3f, 3f, 3f);
+        }
+        else 
+        {
+            _rb.mass -= 4f; // Ебаный пузырь
+            gameObject.transform.localScale -= new Vector3(4f, 4f, 4f);
+        }
         if (_currentHP <= 0)
         {
             _currentHP = 0;
@@ -38,9 +63,9 @@ public class PlayerHP : MonoBehaviour
         for (int i = 0; i < snitchCount; i++)
         {
             Vector3 randomOffset = new Vector3(
-                Random.Range(_minOffset, _maxOffset), 
+                Random.Range(_minOffset - gameObject.transform.localScale.x, _maxOffset + gameObject.transform.localScale.x), 
                 0f, 
-                Random.Range(_minOffset, _maxOffset)
+                Random.Range(_minOffset - gameObject.transform.localScale.x, _maxOffset + gameObject.transform.localScale.x)
             );
             var massBuffer = PhotonNetwork.Instantiate(_massBufferSnitchPrefab.name, gameObject.transform.position + randomOffset, Quaternion.identity);
             var snitch = massBuffer.GetComponent<SnitchLogic>();
@@ -59,23 +84,28 @@ public class PlayerHP : MonoBehaviour
 
         if (_currentHP <= 100f)
         {
-            _rb.mass = 1f; // Дефолт пузырь
+            _rb.mass += 1f; // Дефолт пузырь
+            gameObject.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
         }
         else if (_currentHP <= 150f)
         {
-            _rb.mass = 1.5f; // Средний пузырь
+            _rb.mass += 1.5f; // Средний пузырь
+            gameObject.transform.localScale += new Vector3(1.5f, 1.5f, 1.5f);
         }
         else if (_currentHP <= 200f)
         {
-            _rb.mass = 2f; // Большой пузырь
+            _rb.mass += 2f; // Большой пузырь
+            gameObject.transform.localScale += new Vector3(2f, 2f, 2f);
         }
         else if (_currentHP <= 300f)
         {
-            _rb.mass = 3f; // Огромный пузырь
+            _rb.mass += 3f; // Огромный пузырь
+            gameObject.transform.localScale += new Vector3(3f, 3f, 3f);
         }
         else 
         {
-            _rb.mass = 4f; // Ебаный пузырь
+            _rb.mass += 4f; // Ебаный пузырь
+            gameObject.transform.localScale += new Vector3(4f, 4f, 4f);
         }
     }
 

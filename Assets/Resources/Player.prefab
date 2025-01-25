@@ -421,8 +421,8 @@ MonoBehaviour:
   _hpInOneSnitch: 5
   _playerController: {fileID: 2828497790011009588}
   _massBufferSnitchPrefab: {fileID: 8765564793742245448, guid: f7241c71afb93034495ecf493f5ef027, type: 3}
-  _maxOffset: 0.3
-  _minOffset: -0.3
+  _maxOffset: 10
+  _minOffset: -10
   _rb: {fileID: 1480768578480677698}
 --- !u!1001 &4853977837151158694
 PrefabInstance:
