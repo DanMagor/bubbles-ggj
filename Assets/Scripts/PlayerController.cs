@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using Photon.Pun;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,6 +7,8 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private string _playerTag = "Player";
     [SerializeField] private string _iceTag = "Ice";
+    [SerializeField] private MeshRenderer _bubble;
+    [SerializeField] private Animator _anim;
 
     [Header("Movement Settings")] [SerializeField]
     private float _acceleration = 5f;
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float _maxSpeed = 10f;
     [SerializeField] private float _baseStunDuration = 0.2f;
     [SerializeField] private float _additionalStunFor1MassDiff = 0.1f;
+
     private Vector2 _moveInput;
 
 
@@ -94,12 +95,16 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        _bubble.enabled = false;
         _isAlive = false;
+        _anim.SetTrigger("Death");
     }
 
     public void RessurectPlayer()
     {
+        _bubble.enabled = true;
         _isAlive = true;
+        _anim.SetTrigger("Alive");
     }
     private void OnCollisionEnter(Collision col)
     {
@@ -132,6 +137,13 @@ public class PlayerController : MonoBehaviour
             friction = _baseFriction;
             turnResponsiveness = _baseTurnResponsiveness;
         }
+    }
+
+    public void StunPlayer(float time)
+    {
+        _isStunned = true;
+        StopAllCoroutines();
+        StartCoroutine(Stun(time));
     }
 
     private IEnumerator Stun(float additionalStunDuration)
