@@ -12,7 +12,11 @@ public class Trampoline : MonoBehaviour
         {
             var rb = col.rigidbody;
             var stun = rb.gameObject.GetComponent<PlayerController>();
-            stun.StunPlayer(_stunDuration);
+            var stunDecrease = rb.mass * 0.1f;
+            if (stunDecrease < _stunDuration)
+            {
+                stun.StunPlayer(_stunDuration - stunDecrease);
+            }
             rb.velocity = Vector3.zero;
             Vector3 launchDirection = transform.up;
             rb.AddForce(launchDirection * _launchForce, ForceMode.Impulse);
