@@ -18,6 +18,8 @@ public class MenuLogic : MonoBehaviourPunCallbacks
 
 
     [SerializeField] private GameObject createBtnGO;
+    [SerializeField] private GameObject backFromLobbyBtnGO;
+    [SerializeField] private GameObject backFromLobbyListBtnGO;
     [SerializeField] private GameObject getRoomsBtnGO;
     [SerializeField] private GameObject scrollViewGO;
     [SerializeField] private GameObject joinRoomBtnPrefab;
@@ -39,11 +41,25 @@ public class MenuLogic : MonoBehaviourPunCallbacks
     {
         createBtnGO.SetActive(false);
         getRoomsBtnGO.SetActive(false);
+        backFromLobbyBtnGO.SetActive(true);
         var roomOptions = new RoomOptions
         {
             MaxPlayers = maxPlayers
         };
         PhotonNetwork.CreateRoom(null, roomOptions, null);
+    }
+
+    public void BackFromLobby()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
+        backFromLobbyBtnGO.SetActive(false);
+        createdRoomField.gameObject.SetActive(false);
+        startGameBtn.gameObject.SetActive(false);
+        createBtnGO.SetActive(true);
+        getRoomsBtnGO.SetActive(true);
     }
     
     public override void OnConnectedToMaster()
@@ -95,10 +111,18 @@ public class MenuLogic : MonoBehaviourPunCallbacks
 
     public void GetRoomsList()
     {
-        
         createBtnGO.SetActive(false);
         getRoomsBtnGO.SetActive(false);
+        backFromLobbyListBtnGO.SetActive(true);
         PhotonNetwork.JoinLobby();
+    }
+
+    public void BackFromLobbyList()
+    {
+        backFromLobbyListBtnGO.SetActive(false);
+        scrollViewGO.SetActive(false);
+        createBtnGO.SetActive(true);
+        getRoomsBtnGO.SetActive(true);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
