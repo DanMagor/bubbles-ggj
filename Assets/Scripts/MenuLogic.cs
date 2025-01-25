@@ -68,7 +68,7 @@ public class MenuLogic : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.LogError("Player Joined Room");
+        Debug.Log("Player Joined Room");
         playersText.text = "Players: " + PhotonNetwork.CurrentRoom.PlayerCount;
         
     }
@@ -80,7 +80,7 @@ public class MenuLogic : MonoBehaviourPunCallbacks
     }
     public void JoinRoom()
     {
-        Debug.LogError("Joining Room");
+        Debug.Log("Joining Room");
         PhotonNetwork.JoinRoom(roomToJoinField.text);
     }
 
