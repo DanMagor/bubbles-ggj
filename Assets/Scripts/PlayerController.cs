@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float _baseFriction = 0f;
     private float _baseTurnResponsiveness = 0f;
     [SerializeField] private bool _inverseControl = false;
+    [SerializeField] private bool _isAlive = true;
 
     private void Awake()
     {
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
             control = -1f;
         }
 
-        if (!_isStunned)
+        if (!_isStunned && _isAlive)
         {
             var inputVelocity = new Vector3(_moveInput.x * control * turnResponsiveness, 0,
                                     _moveInput.y * control * turnResponsiveness) *
@@ -74,6 +75,11 @@ public class PlayerController : MonoBehaviour
                     new Vector3(newHorizontalVelocity.x, _rigidbody.velocity.y, newHorizontalVelocity.z);
             }
         }
+
+        if (!_isAlive)
+        {
+            _rigidbody.velocity = Vector3.zero;
+        }
     }
 
     public void InverseControl()
@@ -86,6 +92,15 @@ public class PlayerController : MonoBehaviour
         _inverseControl = false;
     }
 
+    public void KillPlayer()
+    {
+        _isAlive = false;
+    }
+
+    public void RessurectPlayer()
+    {
+        _isAlive = true;
+    }
     private void OnCollisionEnter(Collision col)
     {
         if (col.gameObject.CompareTag(_playerTag) && !_isStunned)

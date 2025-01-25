@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
+  _iceTag: Ice
   _acceleration: 10
   _maxSpeed: 11
   _baseStunDuration: 0.2
@@ -165,7 +166,11 @@ MonoBehaviour:
   _rigidbody: {fileID: 1480768578480677698}
   photonView: {fileID: -6909382407528085004}
   friction: 0.5
+  frictionOnIce: 0.5
   turnResponsiveness: 4
+  turnResponsivenessOnIce: 1
+  _inverseControl: 0
+  _isAlive: 1
 --- !u!114 &5052800835173714073
 MonoBehaviour:
   m_ObjectHideFlags: 0
