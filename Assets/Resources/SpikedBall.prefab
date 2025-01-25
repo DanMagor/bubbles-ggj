@@ -4847,7 +4847,7 @@ GameObject:
   - component: {fileID: 7694009412486016757}
   m_Layer: 0
   m_Name: SpikedBall
-  m_TagString: Untagged
+  m_TagString: Snitch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5096,6 +5096,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
+  _damage: 5
 --- !u!1001 &3909479959159533121
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -4848,7 +4848,7 @@ GameObject:
   - component: {fileID: 6734275246557144713}
   m_Layer: 0
   m_Name: MassBuff
-  m_TagString: Untagged
+  m_TagString: Snitch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5103,5 +5103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85722d2e86d493418d9e10617c0a5e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bonusMass: 1
-  _bonusSize: 1
+  _additionalHP: 5
