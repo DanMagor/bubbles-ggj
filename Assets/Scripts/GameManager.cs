@@ -7,7 +7,7 @@ using Photon.Pun.Demo.PunBasics;
 using Photon.Realtime;
 using UnityEngine;
 
-public class GameInit : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
 
   
@@ -42,7 +42,9 @@ public class GameInit : MonoBehaviour
   {
     for (var i = 0; i < playersList.Count; i++)
     {
-      playersControllers[i].gameObject.SetActive(false);
+      if (playersList[i].ActorNumber != playerView.Controller.ActorNumber) continue;
+      playersControllers[i].gameObject.SetActive(false); // playersControllers[i].KillPlayer();
+      break;
     }
   }
 }
