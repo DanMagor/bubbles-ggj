@@ -6,7 +6,7 @@ namespace Bonus
 {
     public class IncreaseMass : NewBonus
     {
-        [SerializeField] private Material bonusMaterial;
+        [SerializeField] public Material bonusMaterial;
         [SerializeField] private float massStep = 1f;
         
         public override void ActivateBonus(GameObject target)

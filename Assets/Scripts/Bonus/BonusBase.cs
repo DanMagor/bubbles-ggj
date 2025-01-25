@@ -7,15 +7,20 @@ namespace Bonus
     {
         public NewBonus NewBonus;
         public event Action OnBonusCollected;
-        private Material mat;
+        private MeshRenderer mat;
 
         private void Start()
         {
-            mat = gameObject.GetComponent<Material>();
-            mat = NewBonus.gameObject.GetComponent<Material>();
-        }
 
-        private void OnCollisionEnter(Collision other)
+            mat = gameObject.GetComponent<MeshRenderer>();
+            mat.material = ((IncreaseMass)NewBonus).bonusMaterial;
+            
+
+        }
+        
+        
+
+        private void OnTriggerEnter(Collider other)
         {
             NewBonus.ActivateBonus(other.gameObject);
 
