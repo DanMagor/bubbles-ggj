@@ -1,14 +1,18 @@
 using System;
+using System.Collections.Generic;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    
-    public static int numPlayers = 0;
-    private void Awake()
-    {
         
-        DontDestroyOnLoad(this);
+        public static List<Photon.Realtime.Player> Players;
+        private void Awake()
+        {
+                DontDestroyOnLoad(this);
+        }
+
         
-    }
+        
 }

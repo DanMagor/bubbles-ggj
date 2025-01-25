@@ -1,26 +1,27 @@
 using System;
+using System.Linq;
 using Photon.Pun;
 using UnityEngine;
 
-public class GameInit : MonoBehaviour, IPunObservable
+public class GameInit : MonoBehaviour
 {
 
   
   [SerializeField] private GameObject playerPrefab;
   [SerializeField] private Material[] playersMaterials;
-  private int playersConnected = 0;
-  private Vector3 lastPosition;
-  private Quaternion lastRotation;
-  
-  
-  private void Start()
+
+  private void Awake()
   {
-    var go = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0+(1.5f*playersConnected), 2, 0), Quaternion.identity);
-    playersConnected++;
+    GameManager.Players = PhotonNetwork.PlayerList.ToList();
   }
 
-  public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+  private void Start()
   {
-   
+    for (var i = 0; i < GameManager.Players.Count; i++)
+    {
+      if (GameManager.Players[i].ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber) continue;
+      var go = PhotonNetwork.Instantiate(playerPrefab.name, new Vector3(0+(1.5f*i), 2, 0), Quaternion.identity);
+      break;
+    }
   }
 }
