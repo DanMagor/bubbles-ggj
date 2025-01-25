@@ -95,6 +95,8 @@ public class PlayerController : MonoBehaviour
 
     public void KillPlayer()
     {
+        _rigidbody.freezeRotation = true;
+        transform.rotation = Quaternion.identity;
         _bubble.enabled = false;
         _isAlive = false;
         _anim.SetTrigger("Death");
@@ -102,6 +104,7 @@ public class PlayerController : MonoBehaviour
 
     public void RessurectPlayer()
     {
+        _rigidbody.freezeRotation = false;
         _bubble.enabled = true;
         _isAlive = true;
         _anim.SetTrigger("Alive");
