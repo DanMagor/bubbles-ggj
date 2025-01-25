@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
     for (var i = 0; i < playersList.Count; i++)
     {
       if (playersList[i].ActorNumber != playerView.Controller.ActorNumber) continue;
-      playersControllers[i].gameObject.SetActive(false); // playersControllers[i].KillPlayer();
+      playersControllers[i].KillPlayer();
       break;
     }
   }
