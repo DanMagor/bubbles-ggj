@@ -9,42 +9,55 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-  
-  [SerializeField] private GameObject playerPrefab;
-  [SerializeField] private Material[] playersMaterials;
-  [SerializeField] private CinemachineVirtualCamera _camera;
+    [SerializeField] private GameObject playerPrefab;
+    [SerializeField] private Material[] playersMaterials;
+    [SerializeField] private CinemachineVirtualCamera _camera;
 
 
-  [SerializeField] private Transform[] playersSpawnPositions;
-  private List<Player> playersList;
-  private List<PlayerController> playersControllers;
+    [SerializeField] private Transform[] playersSpawnPositions;
+    private List<Player> playersList;
+    private List<PlayerController> playersControllers;
 
-  private void Awake()
-  {
-    playersList = PhotonNetwork.PlayerList.ToList();
-    playersControllers = new List<PlayerController>();
-  }
+    [SerializeField] private GameObject _restartBtn;
 
-  private void Start()
-  {
-    for (var i = 0; i < playersList.Count; i++)
+    private void Awake()
     {
-      if (playersList[i].ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber) continue;
-      var go = PhotonNetwork.Instantiate(playerPrefab.name, playersSpawnPositions[i].position, Quaternion.identity);
-      playersControllers.Add(go.GetComponent<PlayerController>());
-      _camera.Follow = go.transform;
-      break;
-    }
-  }
+        playersList = PhotonNetwork.PlayerList.ToList();
+        playersControllers = new List<PlayerController>();
 
-  public void KillPlayer(PhotonView playerView)
-  {
-    for (var i = 0; i < playersList.Count; i++)
-    {
-      if (playersList[i].ActorNumber != playerView.Controller.ActorNumber) continue;
-      playersControllers[i].KillPlayer();
-      break;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            _restartBtn.SetActive(true);
+        }
     }
-  }
+
+    private void Start()
+    {
+        for (var i = 0; i < playersList.Count; i++)
+        {
+            if (playersList[i].ActorNumber != PhotonNetwork.LocalPlayer.ActorNumber) continue;
+            var go = PhotonNetwork.Instantiate(playerPrefab.name, playersSpawnPositions[i].position,
+                Quaternion.identity);
+            playersControllers.Add(go.GetComponent<PlayerController>());
+            _camera.Follow = go.transform;
+            break;
+        }
+    }
+
+    public void KillPlayer(PhotonView playerView)
+    {
+        for (var i = 0; i < playersList.Count; i++)
+        {
+            if (playersList[i].ActorNumber != playerView.Controller.ActorNumber) continue;
+            playersControllers[i].KillPlayer();
+            break;
+        }
+    }
+
+    public void RestartGame()
+    {
+        if (!PhotonNetwork.IsMasterClient) return;
+        PhotonNetwork.DestroyAll();
+        PhotonNetwork.LoadLevel("RestartScene");
+    }
 }
