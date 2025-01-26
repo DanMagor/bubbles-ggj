@@ -417,7 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598e90104c48fcb43acdc574cd119025, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _startHP: 100
+  _startHP: 300
   _hpInOneSnitch: 5
   _playerController: {fileID: 2828497790011009588}
   _massBufferSnitchPrefab: {fileID: 8765564793742245448, guid: f7241c71afb93034495ecf493f5ef027, type: 3}
