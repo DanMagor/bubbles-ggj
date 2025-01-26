@@ -12,6 +12,10 @@ public class SnitchLogic : MonoBehaviourPunCallbacks, IPunObservable
     private Bounds _bounds;
     [SerializeField] public Collider _boxArea;
 
+    private void Awake()
+    {
+        _boxArea = BoxAreaReference.box;
+    }
     private void Start()
     {
         if (PhotonNetwork.IsMasterClient)
