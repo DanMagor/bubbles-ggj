@@ -14,6 +14,16 @@ public class PlayerHP : MonoBehaviour
     [SerializeField] private float _maxOffset = 5f;
     [SerializeField] private float _minOffset = -5f;
     [SerializeField] private Rigidbody _rb;
+    [SerializeField] private float _from100Scale = 0.2f;
+    [SerializeField] private float _from150Scale = 0.2f;
+    [SerializeField] private float _from200Scale = 0.2f;
+    [SerializeField] private float _from300Scale = 0.2f;
+    [SerializeField] private float _from400Scale = 0.2f;
+    [SerializeField] private float _from100Mass = 0.2f;
+    [SerializeField] private float _from150Mass = 0.2f;
+    [SerializeField] private float _from200Mass = 0.2f;
+    [SerializeField] private float _from300Mass = 0.2f;
+    [SerializeField] private float _from400Mass = 0.2f;
     private float _currentHP;
 
     private void Awake()
@@ -27,28 +37,28 @@ public class PlayerHP : MonoBehaviour
         CreateSnitch(damage);
         if (_currentHP <= 100f)
         {
-            _rb.mass -= 1f; // Дефолт пузырь
-            gameObject.transform.localScale -= new Vector3(0.2f, 0.2f, 0.2f);
+            _rb.mass -= _from100Mass; // Дефолт пузырь
+            gameObject.transform.localScale -= new Vector3(_from100Scale, _from100Scale, _from100Scale);
         }
         else if (_currentHP <= 150f)
         {
-            _rb.mass -= 1.5f; // Средний пузырь
-            gameObject.transform.localScale -= new Vector3(1.5f, 1.5f, 1.5f);
+            _rb.mass -= _from150Mass; // Средний пузырь
+            gameObject.transform.localScale -= new Vector3(_from150Scale, _from150Scale, _from150Scale);
         }
         else if (_currentHP <= 200f)
         {
-            _rb.mass -= 2f; // Большой пузырь
-            gameObject.transform.localScale -= new Vector3(2f, 2f, 2f);
+            _rb.mass -= _from200Mass; // Большой пузырь
+            gameObject.transform.localScale -= new Vector3(_from200Scale, _from200Scale, _from200Scale);
         }
         else if (_currentHP <= 300f)
         {
-            _rb.mass -= 3f; // Огромный пузырь
-            gameObject.transform.localScale -= new Vector3(3f, 3f, 3f);
+            _rb.mass -= _from300Mass; // Огромный пузырь
+            gameObject.transform.localScale -= new Vector3(_from300Scale, _from300Scale, _from300Scale);
         }
         else 
         {
-            _rb.mass -= 4f; // Ебаный пузырь
-            gameObject.transform.localScale -= new Vector3(4f, 4f, 4f);
+            _rb.mass -= _from400Mass; // Ебаный пузырь
+            gameObject.transform.localScale -= new Vector3(_from400Scale, _from400Scale, _from400Scale);
         }
         if (_currentHP <= 0)
         {
@@ -84,28 +94,28 @@ public class PlayerHP : MonoBehaviour
 
         if (_currentHP <= 100f)
         {
-            _rb.mass += 1f; // Дефолт пузырь
-            gameObject.transform.localScale += new Vector3(0.2f, 0.2f, 0.2f);
+            _rb.mass += _from100Mass; // Дефолт пузырь
+            gameObject.transform.localScale += new Vector3(_from100Scale, _from100Scale, _from100Scale);
         }
         else if (_currentHP <= 150f)
         {
-            _rb.mass += 1.5f; // Средний пузырь
-            gameObject.transform.localScale += new Vector3(1.5f, 1.5f, 1.5f);
+            _rb.mass += _from150Mass; // Средний пузырь
+            gameObject.transform.localScale += new Vector3(_from150Scale, _from150Scale, _from150Scale);
         }
         else if (_currentHP <= 200f)
         {
-            _rb.mass += 2f; // Большой пузырь
-            gameObject.transform.localScale += new Vector3(2f, 2f, 2f);
+            _rb.mass += _from200Mass; // Большой пузырь
+            gameObject.transform.localScale += new Vector3(_from200Scale, _from200Scale, _from200Scale);
         }
         else if (_currentHP <= 300f)
         {
-            _rb.mass += 3f; // Огромный пузырь
-            gameObject.transform.localScale += new Vector3(3f, 3f, 3f);
+            _rb.mass += _from300Mass; // Огромный пузырь
+            gameObject.transform.localScale += new Vector3(_from300Scale, _from300Scale, _from300Scale);
         }
         else 
         {
-            _rb.mass += 4f; // Ебаный пузырь
-            gameObject.transform.localScale += new Vector3(4f, 4f, 4f);
+            _rb.mass += _from400Mass; // Ебаный пузырь
+            gameObject.transform.localScale += new Vector3(_from400Scale, _from400Scale, _from400Scale);
         }
     }
 
