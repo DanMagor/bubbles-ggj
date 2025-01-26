@@ -5058,7 +5058,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _targetPos: {x: 0, y: 0, z: 0}
-  _speed: 10
+  _speed: 6
   _boxArea: {fileID: 0}
 --- !u!114 &2555770062558885210
 MonoBehaviour:
