@@ -424,6 +424,16 @@ MonoBehaviour:
   _maxOffset: 10
   _minOffset: -10
   _rb: {fileID: 1480768578480677698}
+  _from100Scale: 0.2
+  _from150Scale: 0.2
+  _from200Scale: 0.2
+  _from300Scale: 0.2
+  _from400Scale: 0.2
+  _from100Mass: 0.2
+  _from150Mass: 0.2
+  _from200Mass: 0.2
+  _from300Mass: 0.2
+  _from400Mass: 0.2
 --- !u!1001 &4853977837151158694
 PrefabInstance:
   m_ObjectHideFlags: 0
