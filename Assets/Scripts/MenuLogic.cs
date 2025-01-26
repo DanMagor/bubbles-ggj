@@ -136,6 +136,7 @@ public class MenuLogic : MonoBehaviourPunCallbacks
         {
             createBtnGO.SetActive(true);
             getRoomsBtnGO.SetActive(true);
+            backFromLobbyListBtnGO.SetActive(false);
         }
         else
         {
