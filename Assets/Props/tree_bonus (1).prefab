@@ -63,7 +63,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: c77551e83e913194ba8c11300dbcbd58, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: d654fd4b122944248954737ac07d18b8, type: 2}
+      objectReference: {fileID: 2100000, guid: 62c7382d726a6494aa45e45a56422d62, type: 2}
     - target: {fileID: 919132149155446097, guid: c77551e83e913194ba8c11300dbcbd58, type: 3}
       propertyPath: m_Name
       value: tree_bonus (1)

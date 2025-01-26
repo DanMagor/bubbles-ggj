@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerTag: Player
+  _damage: 30
 --- !u!65 &5235013081547454091
 BoxCollider:
   m_ObjectHideFlags: 0
