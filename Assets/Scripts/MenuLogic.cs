@@ -119,6 +119,10 @@ public class MenuLogic : MonoBehaviourPunCallbacks
 
     public void BackFromLobbyList()
     {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom();
+        }
         backFromLobbyListBtnGO.SetActive(false);
         scrollViewGO.SetActive(false);
         createBtnGO.SetActive(true);
